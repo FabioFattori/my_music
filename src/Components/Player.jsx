@@ -157,7 +157,7 @@ function Player({ audio, titolo, setSong }) {
           <IndietroIcon fontSize="inherit" />
         </IconButton>
         {audio ? (
-          <audio id="audio" src={audio.src} autoPlay controls />
+          <audio id="audio" className="audio" src={audio.src} autoPlay controls />
         ) : (
           <audio controls />
         )}
