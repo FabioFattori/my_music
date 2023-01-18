@@ -1,29 +1,27 @@
-import React from 'react'
-import {storage} from "../base"
-import { ref ,uploadBytes } from "firebase/storage";
+import React, { useState } from "react";
+import { storage } from "../base";
+import { ref, uploadBytes } from "firebase/storage";
 
+import { FileUploader } from "react-drag-drop-files";
 
 function SelectFile() {
-    const onChangeFile=(e)=>{
-        const fSelected=e.target.files[0];
+  const [file, setFile] = useState(null);
+  const handleChange = (file) => {
+    setFile(file);
+    const fileRef = ref(storage, file.name);
 
-        if(fSelected.type==="audio/mpeg"){
-          const fileRef = ref(storage, fSelected.name);
-  
-          uploadBytes(fileRef, fSelected).then(() => {
-              console.log('Uploaded file!');
-            });
-        }
-        
-            
-            
-    }
+    uploadBytes(fileRef, file).then(() => {
+      console.log("Uploaded file!");
+    });
+  };
+
+  const fileTypes = ["MP3"];
 
   return (
-    <div>
-        <input type="file" onChange={onChangeFile} />
+    <div className="FileUploader">
+      <FileUploader className="DnD" handleChange={handleChange} name="file" types={fileTypes} />
     </div>
-  )
+  );
 }
 
-export default SelectFile
+export default SelectFile;

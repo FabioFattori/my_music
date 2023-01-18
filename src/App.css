@@ -1,38 +1,147 @@
 .App {
   text-align: center;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  margin-top: -100px;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+}
+
+.Player {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.MinorIcons {
+  display: flex;
+  justify-content: space-around;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.Tracce {
+  margin-top: 200px;
+}
+
+.SingleSong {
+  margin-bottom: 10px;
+}
+
+.MusicPlayer {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.FileUploader {
+  height: 100%;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.lkjDVC {
+  padding-left: 100px !important;
+
+  padding-bottom: 100px !important;
+
+  padding-top: 100px !important;
+
+  padding-right: 100px !important;
+}
+
+@media (max-height: 900px) {
+  .Player {
+    display: flex;
+    align-items: center;
+
+    justify-content: space-around;
   }
-  to {
-    transform: rotate(360deg);
+
+  .Tracce {
+    margin-top: 25px;
+  }
+
+  .MusicPlayer {
+    display: flex;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-left: 20px;
+    max-width: 350px;
+  }
+
+  .container {
+    margin-top: 25px;
+    height: 70%;
+    display: flex;
+
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
+
+  .lkjDVC {
+    padding-left: 20px !important;
+
+    padding-bottom: 50px !important;
+
+    padding-top: 50px !important;
+
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .wrapped{
+    text-align: center;
+    align-items: center;
+  }
+
+  .SongTitle {
+    font-size: 30px;
+    display: flex;
+    margin-left: 15px;
+    justify-content: center;
+  }
+
+  .Player {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+    justify-content: space-around;
+  }
+
+  .Tracce {
+    margin-top: 0px;
+  }
+
+  .MusicPlayer {
+    display: flex;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-left: 20px;
+  }
+
+  .container {
+    align-items: center;
+    margin-top: 25px;
+    height: 70%;
+    display: flex;
+
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
+
+  .lkjDVC {
+    padding-left: 20px !important;
+
+    padding-bottom: 50px !important;
+
+    padding-top: 50px !important;
+
+    padding-right: 20px !important;
   }
 }

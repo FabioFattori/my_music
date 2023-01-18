@@ -1,15 +1,28 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Paper from "@mui/material/Paper";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import AudioFileIcon from "@mui/icons-material/AudioFile";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 function Bottom() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState();
+
   const navigate = useNavigate();
+
+  const location = useLocation();
+  useEffect(() => {
+  
+    if(location.pathname==="/"){
+      setValue(0)
+    }else{
+      setValue(1)
+    }
+    
+  }, [])
+  
 
   return (
     <Paper

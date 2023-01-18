@@ -1,25 +1,28 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from "react";
+import Button from "@mui/material/Button";
+import {getNome} from "../Functions/getNome"
+function SingleSong({ url, setCurrentAudio }) {
+  const [audio, setAudio] = useState();
 
-function SingleSong({url}) {
-    const [audio,setAudio]=useState();
+  useEffect(() => {
+    setAudio(new Audio(url));
+  }, []);
 
-    useEffect(() => {
-      setAudio(new Audio(url));
-    
-    }, [])
-    
-
-    function getNome(){
-        let appoggio=url.split('https://firebasestorage.googleapis.com/v0/b/mymusic1112.appspot.com/o/')[1];
-        return appoggio.split('?')[0]
-    }
+  
 
   return (
-    <div>
-        <div>{getNome()}</div>
-        <button onClick={()=>audio.play()}>Play</button>
+    <div className="SingleSong">
+      <Button
+        fullWidth
+        variant="text"
+        onClick={() => {
+          setCurrentAudio(audio, getNome(url));
+        }}
+      >
+        {getNome(url)}
+      </Button>
     </div>
-  )
+  );
 }
 
-export default SingleSong
+export default SingleSong;
