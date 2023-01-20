@@ -56,6 +56,10 @@
   padding-right: 100px !important;
 }
 
+.wrapped{
+  max-width: 604px;
+}
+
 @media (max-height: 900px) {
   .Player {
     display: flex;
@@ -102,6 +106,7 @@
   .wrapped{
     text-align: center;
     align-items: center;
+    width: 100%;
   }
 
   .SongTitle {
@@ -114,19 +119,23 @@
   .Player {
     display: flex;
     align-items: center;
-    max-width: 300px;
+    width: 100%;
     justify-content: space-around;
+    position:fixed;
+    top:0;
+    z-index:100;
+    background-color: white;
   }
 
   .Tracce {
-    margin-top: 0px;
+    margin-top: 40%;
   }
 
   .MusicPlayer {
     display: flex;
     padding-top: 20px;
     padding-left: 20px;
-    padding-left: 20px;
+    
   }
 
   .container {

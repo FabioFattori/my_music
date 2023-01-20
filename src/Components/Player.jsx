@@ -5,56 +5,30 @@ import IconButton from "@mui/material/IconButton";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import ReplayIcon from "@mui/icons-material/Replay";
 import { getNome } from "../Functions/getNome";
+import { EstraiIndice } from "../Functions/EstraiIndice";
+import { Next } from "../Functions/Next";
+import { Back } from "../Functions/Back";
+import { setHeight } from "../Functions/SetHeight";
 
 function Player({ audio, titolo, setSong }) {
   const [shuffle, setShuffle] = useState(false);
   const [replay, setReplay] = useState(false);
 
-  useEffect(() => {
-    if (audio !== null) {
-      if (replay) {
-        document.getElementById("audio").addEventListener("ended", () => {
-          document.getElementById("audio").currentTime = 0;
-          document.getElementById("audio").play();
-        });
-      } else if (shuffle) {
-        document.getElementById("audio").addEventListener("ended", () => {
-          let appoggio = JSON.parse(localStorage.getItem("songs"));
-          if (!Array.isArray(appoggio)) {
-            appoggio = [appoggio];
-          }
-          let a = Math.floor(Math.random() * (appoggio.length - 1));
-
-          document.getElementById("audio").src = appoggio[a];
-
-          setSong(appoggio[a], getNome(appoggio[a]));
-        });
-      }
+  const ShuffleEvent = () => {
+    let appoggio = JSON.parse(localStorage.getItem("songs"));
+    if (!Array.isArray(appoggio)) {
+      appoggio = [appoggio];
     }
+    let a = EstraiIndice(appoggio.length);
+    if (appoggio[a].split('"')[1] === undefined) {
+      document.getElementById("audio").src = appoggio[a];
 
-    return () => {
-      if (audio !== null) {
-        if (replay) {
-          document.getElementById("audio").removeEventListener("ended", () => {
-            document.getElementById("audio").currentTime = 0;
-            document.getElementById("audio").play();
-          });
-        } else if (shuffle) {
-          document.getElementById("audio").removeEventListener("ended", () => {
-            let appoggio = JSON.parse(localStorage.getItem("songs"));
-            if (!Array.isArray(appoggio)) {
-              appoggio = [appoggio];
-            }
-            let a = Math.floor(Math.random() * (appoggio.length - 1));
-
-            document.getElementById("audio").src = appoggio[a];
-
-            setSong(appoggio[a], getNome(appoggio[a]));
-          });
-        }
-      }
-    };
-  }, [audio]);
+      setSong(appoggio[a], getNome(appoggio[a]));
+    } else {
+      document.getElementById("audio").src = appoggio[a].split('"')[1];
+      setSong(appoggio[a].split('"')[1], getNome(appoggio[a]));
+    }
+  };
 
   useEffect(() => {
     if (audio !== null) {
@@ -64,104 +38,55 @@ function Player({ audio, titolo, setSong }) {
           document.getElementById("audio").play();
         });
       } else if (shuffle) {
-        document.getElementById("audio").addEventListener("ended", () => {
-          let appoggio = JSON.parse(localStorage.getItem("songs"));
-          if (!Array.isArray(appoggio)) {
-            appoggio = [appoggio];
-          }
-          let a = Math.floor(Math.random() * (appoggio.length - 1));
-
-          document.getElementById("audio").src = appoggio[a];
-
-          setSong(appoggio[a], getNome(appoggio[a]));
-        });
+        document
+          .getElementById("audio")
+          .addEventListener("ended", ShuffleEvent);
       }
     }
-
-    return () => {
-      if (audio !== null) {
-        if (replay) {
-          document.getElementById("audio").removeEventListener("ended", () => {
-            document.getElementById("audio").currentTime = 0;
-            document.getElementById("audio").play();
-          });
-        } else if (shuffle) {
-          document.getElementById("audio").removeEventListener("ended", () => {
-            let appoggio = JSON.parse(localStorage.getItem("songs"));
-            if (!Array.isArray(appoggio)) {
-              appoggio = [appoggio];
-            }
-            let a = Math.floor(Math.random() * (appoggio.length - 1));
-
-            document.getElementById("audio").src = appoggio[a];
-
-            setSong(appoggio[a], getNome(appoggio[a]));
-          });
-        }
-      }
-    };
-  }, [replay]);
-
-  useEffect(() => {
-    if (audio !== null) {
-      if (replay) {
-        document.getElementById("audio").addEventListener("ended", () => {
-          document.getElementById("audio").currentTime = 0;
-          document.getElementById("audio").play();
-        });
-      } else if (shuffle) {
-        document.getElementById("audio").addEventListener("ended", () => {
-          let appoggio = JSON.parse(localStorage.getItem("songs"));
-          if (!Array.isArray(appoggio)) {
-            appoggio = [appoggio];
-          }
-          let a = Math.floor(Math.random() * (appoggio.length - 1));
-
-          document.getElementById("audio").src = appoggio[a];
-
-          setSong(appoggio[a], getNome(appoggio[a]));
-        });
-      }
-    }
-
-    return () => {
-      if (audio !== null) {
-        if (replay) {
-          document.getElementById("audio").removeEventListener("ended", () => {
-            document.getElementById("audio").currentTime = 0;
-            document.getElementById("audio").play();
-          });
-        } else if (shuffle) {
-          document.getElementById("audio").removeEventListener("ended", () => {
-            let appoggio = JSON.parse(localStorage.getItem("songs"));
-            if (!Array.isArray(appoggio)) {
-              appoggio = [appoggio];
-            }
-            let a = Math.floor(Math.random() * (appoggio.length - 1));
-
-            document.getElementById("audio").src = appoggio[a];
-
-            setSong(appoggio[a], getNome(appoggio[a]));
-          });
-        }
-      }
-    };
-  }, [shuffle]);
+  }, [audio, shuffle, replay]);
 
   return (
     <div className="wrapped">
-      <h1 className="SongTitle">{titolo}</h1>
+      <h1 id="SongTitle" className="SongTitle">
+        {titolo}
+      </h1>
 
       <div className="MusicPlayer">
-        <IconButton aria-label="delete" size="large">
+        <IconButton
+          onClick={() => {
+            let v = Back();
+            setSong(new Audio(v.url), v.title);
+            setTimeout(() => {
+              setHeight();
+            }, 1);
+          }}
+          aria-label="back"
+          size="large"
+        >
           <IndietroIcon fontSize="inherit" />
         </IconButton>
         {audio ? (
-          <audio id="audio" className="audio" src={audio.src} autoPlay controls />
+          <audio
+            id="audio"
+            className="audio"
+            src={audio.src}
+            autoPlay
+            controls
+          />
         ) : (
           <audio controls />
         )}
-        <IconButton aria-label="delete" size="large">
+        <IconButton
+          onClick={() => {
+            let v = Next();
+            setSong(new Audio(v.url), v.title);
+            setTimeout(() => {
+              setHeight();
+            }, 1);
+          }}
+          aria-label="next"
+          size="large"
+        >
           <AvantiIcon fontSize="inherit" />
         </IconButton>
       </div>

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-import {getNome} from "../Functions/getNome"
+import { getNome } from "../Functions/getNome";
+import { setHeight } from "../Functions/SetHeight";
+import { ConvertUrl } from "../Functions/ConvertUrl";
+
 function SingleSong({ url, setCurrentAudio }) {
   const [audio, setAudio] = useState();
 
   useEffect(() => {
-    setAudio(new Audio(url));
-  }, []);
+    let U = ConvertUrl(url);
 
-  
+    setAudio(new Audio(U));
+  }, []);
 
   return (
     <div className="SingleSong">
@@ -17,6 +20,9 @@ function SingleSong({ url, setCurrentAudio }) {
         variant="text"
         onClick={() => {
           setCurrentAudio(audio, getNome(url));
+          setTimeout(() => {
+            setHeight();
+          }, 1);
         }}
       >
         {getNome(url)}
