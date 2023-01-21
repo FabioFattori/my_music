@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AvantiIcon from "@mui/icons-material/FastForward";
 import IndietroIcon from "@mui/icons-material/FastRewind";
 import IconButton from "@mui/material/IconButton";
@@ -30,20 +30,21 @@ function Player({ audio, titolo, setSong }) {
     }
   };
 
-  useEffect(() => {
-    if (audio !== null) {
-      if (replay) {
-        document.getElementById("audio").addEventListener("ended", () => {
-          document.getElementById("audio").currentTime = 0;
-          document.getElementById("audio").play();
-        });
-      } else if (shuffle) {
-        document
-          .getElementById("audio")
-          .addEventListener("ended", ShuffleEvent);
-      }
+  const ReplayEvent = () => {
+    document.getElementById("audio").currentTime = 0;
+    document.getElementById("audio").play();
+  };
+
+  const EndOfSongEvent = () => {
+    console.log("in");
+    if (replay) {
+      console.log("replay");
+      ReplayEvent();
+    } else if (shuffle) {
+      console.log("tua mamma");
+      ShuffleEvent();
     }
-  }, [audio, shuffle, replay]);
+  };
 
   return (
     <div className="wrapped">
@@ -74,7 +75,7 @@ function Player({ audio, titolo, setSong }) {
             controls
           />
         ) : (
-          <audio controls />
+          <audio id="audio" controls />
         )}
         <IconButton
           onClick={() => {
@@ -98,6 +99,10 @@ function Player({ audio, titolo, setSong }) {
               <IconButton
                 onClick={() => {
                   setShuffle(!shuffle);
+
+                  document
+                    .getElementById("audio")
+                    .removeEventListener("ended", EndOfSongEvent);
                 }}
                 aria-label="delete"
                 size="medium"
@@ -110,6 +115,9 @@ function Player({ audio, titolo, setSong }) {
               <IconButton
                 onClick={() => {
                   setShuffle(!shuffle);
+                  document
+                    .getElementById("audio")
+                    .addEventListener("ended", EndOfSongEvent);
                 }}
                 aria-label="delete"
                 size="medium"
@@ -122,6 +130,9 @@ function Player({ audio, titolo, setSong }) {
               <IconButton
                 onClick={() => {
                   setReplay(!replay);
+                  document
+                    .getElementById("audio")
+                    .removeEventListener("ended", EndOfSongEvent);
                 }}
                 aria-label="delete"
                 size="medium"
@@ -134,6 +145,9 @@ function Player({ audio, titolo, setSong }) {
               <IconButton
                 onClick={() => {
                   setReplay(!replay);
+                  document
+                    .getElementById("audio")
+                    .addEventListener("ended", EndOfSongEvent);
                 }}
                 aria-label="delete"
                 size="medium"

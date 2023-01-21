@@ -22,13 +22,16 @@
 
 .Tracce {
   margin-top: 200px;
+
+  margin-bottom: 15%;
+  height: fit-content;
 }
 
 .SingleSong {
   margin-bottom: 10px;
 }
 
-.audio{
+.audio {
   width: 500px;
 }
 
@@ -36,6 +39,8 @@
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
+
+  align-items: center;
 }
 
 .FileUploader {
@@ -56,7 +61,7 @@
   padding-right: 100px !important;
 }
 
-.wrapped{
+.wrapped {
   max-width: 604px;
 }
 
@@ -102,8 +107,7 @@
 }
 
 @media (max-width: 480px) {
-
-  .wrapped{
+  .wrapped {
     text-align: center;
     align-items: center;
     width: 100%;
@@ -121,9 +125,9 @@
     align-items: center;
     width: 100%;
     justify-content: space-around;
-    position:fixed;
-    top:0;
-    z-index:100;
+    position: fixed;
+    top: 0;
+    z-index: 100;
     background-color: white;
   }
 
@@ -135,7 +139,6 @@
     display: flex;
     padding-top: 20px;
     padding-left: 20px;
-    
   }
 
   .container {
