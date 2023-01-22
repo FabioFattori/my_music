@@ -4,7 +4,7 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import AudioFileIcon from "@mui/icons-material/AudioFile";
-
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate,useLocation } from "react-router-dom";
 
 function Bottom() {
@@ -17,6 +17,8 @@ function Bottom() {
   
     if(location.pathname==="/"){
       setValue(0)
+    }else if(location.pathname==="/Settings"){
+      setValue(2)
     }else{
       setValue(1)
     }
@@ -37,8 +39,10 @@ function Bottom() {
           
             if (newValue === 0) {
               navigate("/");
-            } else {
+            } else if(newValue===1){
               navigate("/MusicPlayer");
+            }else{
+              navigate("/Settings")
             }
           
         }}
@@ -52,6 +56,11 @@ function Bottom() {
           id="Musica"
           label="Musica"
           icon={<AudioFileIcon />}
+        />
+        <BottomNavigationAction
+          id="Settings"
+          label="Impostazioni"
+          icon={<SettingsIcon />}
         />
       </BottomNavigation>
     </Paper>

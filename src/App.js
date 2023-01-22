@@ -1,9 +1,10 @@
 import SelectFile from "./Components/SelectFile";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import React,{useState} from "react";
 import Songs from "./Pages/Songs";
 import Bottom from "./Components/Bottom";
+import Settings from "./Pages/Settings";
 
 function App() {
   const [selectedSong, setSelectedSong] = useState(null);
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SelectFile />} />
         <Route path="/MusicPlayer" element={<Songs s={selectedSong} title={TitleOfSong} setSong={setSong} />} />
+        <Route path="/Settings" element={<Settings />} />
       </Routes>
       <Bottom />
     </div>

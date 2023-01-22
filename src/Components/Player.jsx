@@ -105,7 +105,7 @@ function Player({ audio, titolo, setSong }) {
                 }}
                 aria-label="delete"
                 size="medium"
-                color="success"
+                className="iconButtonSelected"
               >
                 <ShuffleIcon fontSize="inherit" />
               </IconButton>
@@ -139,7 +139,8 @@ function Player({ audio, titolo, setSong }) {
                 }}
                 aria-label="delete"
                 size="medium"
-                color="success"
+                
+                className="iconButtonSelected"
               >
                 <ReplayIcon fontSize="inherit" />
               </IconButton>
