@@ -186,3 +186,12 @@
 .iconButtonSelected{
   color: var(--HighTheme) !important;
 }
+
+
+.lkjDVC {
+  border-color: var(--HighTheme)!important;
+}
+
+.lkjDVC>svg {
+  display: none;
+}
