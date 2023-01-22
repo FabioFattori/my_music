@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AvantiIcon from "@mui/icons-material/FastForward";
 import IndietroIcon from "@mui/icons-material/FastRewind";
 import IconButton from "@mui/material/IconButton";
@@ -11,10 +11,18 @@ import { Back } from "../Functions/Back";
 import { setHeight } from "../Functions/SetHeight";
 
 function Player({ audio, titolo, setSong }) {
-  const [shuffle, setShuffle] = useState(false);
-  const [replay, setReplay] = useState(false);
+  const [shuffle, setShuffle] = useState(true);
+  const [replay, setReplay] = useState();
+  var s = true;
+  var r = false;
 
-  const ShuffleEvent = () => {
+  useEffect(() => {
+    document
+      .getElementById("audio")
+      .addEventListener("ended", ShuffleEvent, true);
+  }, []);
+
+  const ShuffleEvent = useCallback(() => {
     let appoggio = JSON.parse(localStorage.getItem("songs"));
     if (!Array.isArray(appoggio)) {
       appoggio = [appoggio];
@@ -22,29 +30,19 @@ function Player({ audio, titolo, setSong }) {
     let a = EstraiIndice(appoggio.length);
     if (appoggio[a].split('"')[1] === undefined) {
       document.getElementById("audio").src = appoggio[a];
-
+      document.getElementById("SongTitle").innerText = getNome(appoggio[a]);
       setSong(appoggio[a], getNome(appoggio[a]));
     } else {
       document.getElementById("audio").src = appoggio[a].split('"')[1];
+      document.getElementById("SongTitle").innerText = getNome(appoggio[a]);
       setSong(appoggio[a].split('"')[1], getNome(appoggio[a]));
     }
-  };
+  }, []);
 
-  const ReplayEvent = () => {
+  const ReplayEvent = useCallback(() => {
     document.getElementById("audio").currentTime = 0;
     document.getElementById("audio").play();
-  };
-
-  const EndOfSongEvent = () => {
-    console.log("in");
-    if (replay) {
-      console.log("replay");
-      ReplayEvent();
-    } else if (shuffle) {
-      console.log("tua mamma");
-      ShuffleEvent();
-    }
-  };
+  }, []);
 
   return (
     <div className="wrapped">
@@ -98,11 +96,12 @@ function Player({ audio, titolo, setSong }) {
               //shuffle=true
               <IconButton
                 onClick={() => {
-                  setShuffle(!shuffle);
+                  setShuffle(false);
+                  s = false;
 
                   document
                     .getElementById("audio")
-                    .removeEventListener("ended", EndOfSongEvent);
+                    .removeEventListener("ended", ShuffleEvent, true);
                 }}
                 aria-label="delete"
                 size="medium"
@@ -114,10 +113,13 @@ function Player({ audio, titolo, setSong }) {
               //shuffle=false
               <IconButton
                 onClick={() => {
-                  setShuffle(!shuffle);
-                  document
-                    .getElementById("audio")
-                    .addEventListener("ended", EndOfSongEvent);
+                  if (!replay) {
+                    setShuffle(true);
+                    s = true;
+                    document
+                      .getElementById("audio")
+                      .addEventListener("ended", ShuffleEvent, true);
+                  }
                 }}
                 aria-label="delete"
                 size="medium"
@@ -129,10 +131,11 @@ function Player({ audio, titolo, setSong }) {
               //replay=true
               <IconButton
                 onClick={() => {
-                  setReplay(!replay);
+                  setReplay(false);
+                  r = false;
                   document
                     .getElementById("audio")
-                    .removeEventListener("ended", EndOfSongEvent);
+                    .removeEventListener("ended", ReplayEvent, true);
                 }}
                 aria-label="delete"
                 size="medium"
@@ -144,10 +147,14 @@ function Player({ audio, titolo, setSong }) {
               //replay=false
               <IconButton
                 onClick={() => {
-                  setReplay(!replay);
+                  setReplay(true);
+                  r = true;
                   document
                     .getElementById("audio")
-                    .addEventListener("ended", EndOfSongEvent);
+                    .removeEventListener("ended", ShuffleEvent, true);
+                  document
+                    .getElementById("audio")
+                    .addEventListener("ended", ReplayEvent, true);
                 }}
                 aria-label="delete"
                 size="medium"
