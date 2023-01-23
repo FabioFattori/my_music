@@ -21,7 +21,7 @@ function SingleSong({ url, setCurrentAudio }) {
         onClick={() => {
           setCurrentAudio(audio, getNome(url));
           setTimeout(() => {
-            setHeight();
+            setHeight("/MusicPlayer");
           }, 1);
         }}
       >

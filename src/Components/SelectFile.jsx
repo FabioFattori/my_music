@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { storage } from "../base";
 import { ref, uploadBytes } from "firebase/storage";
-
+import { setHeight } from "../Functions/SetHeight";
 import { FileUploader } from "react-drag-drop-files";
 
 function SelectFile() {
@@ -22,8 +22,15 @@ function SelectFile() {
 
   const fileTypes = ["MP3"];
 
+  useEffect(() => {
+    setHeight("/")
+  
+    
+  }, [])
+  
+
   return (
-    <div className="FileUploader">
+    <div id="file-uploader" className="FileUploader">
       <FileUploader
         multiple
         className="DnD"

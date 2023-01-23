@@ -1,15 +1,14 @@
 :root {
   --BaseTheme: rgba(45, 99, 247, 0.562);
-  --HighTheme:rgb(40, 120, 241);
+  --HighTheme: rgb(40, 120, 241);
 }
 
 .App {
   text-align: center;
-  height: 100vh;
+  height: 100%;
 }
 
 .container {
-  margin-top: -100px;
   height: 100%;
   display: flex;
   justify-content: space-around;
@@ -18,19 +17,35 @@
 .Player {
   display: flex;
   align-items: center;
+  padding-top: 40px;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  background-color: white;
+  
+  width: 100%;
+
+  align-items: center;
+  justify-content: space-around;
+}
+
+.SongTitle {
+  font-size: 30px;
 }
 
 .MinorIcons {
+  width: 100%;
   display: flex;
   justify-content: space-around;
 }
 
 .Tracce {
   margin-top: 200px;
-
   margin-bottom: 15%;
   height: fit-content;
 }
+
+
 
 .SingleSong {
   margin-bottom: 10px;
@@ -42,16 +57,14 @@
 
 .MusicPlayer {
   display: flex;
-  margin-top: 20px;
-  margin-bottom: 20px;
-
+  margin-bottom: 10px;
+  margin-top: 15px;
   align-items: center;
 }
 
 .FileUploader {
   height: 100%;
   display: flex;
-
   align-items: center;
   justify-content: space-evenly;
 }
@@ -84,10 +97,7 @@
 
   .MusicPlayer {
     display: flex;
-    margin-top: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-left: 20px;
+    padding-top: 10px;
     max-width: 350px;
   }
 
@@ -112,16 +122,24 @@
 }
 
 @media (max-width: 480px) {
-  .wrapped {
-    text-align: center;
+  .App {
+    display: flex;
     align-items: center;
+    justify-content: center;
+  }
+
+  .wrapped {
+    display: flex;
     width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .SongTitle {
-    font-size: 30px;
+    margin-top: 10px;
+    font-size: 25px;
     display: flex;
-    margin-left: 15px;
     justify-content: center;
   }
 
@@ -130,10 +148,6 @@
     align-items: center;
     width: 100%;
     justify-content: space-around;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-    background-color: white;
   }
 
   .Tracce {
@@ -142,8 +156,9 @@
 
   .MusicPlayer {
     display: flex;
-    padding-top: 20px;
-    padding-left: 20px;
+
+    align-items: center;
+    justify-content: center;
   }
 
   .container {
@@ -167,31 +182,34 @@
   }
 }
 
-.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root{
+.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root {
   color: var(--BaseTheme) !important;
 }
 
-.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected{
+.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {
   color: var(--HighTheme) !important;
 }
 
-.css-10vjzfb-MuiButtonBase-root-MuiButton-root{
+.css-10vjzfb-MuiButtonBase-root-MuiButton-root {
   color: var(--HighTheme) !important;
 }
 
-.css-mf1cb5-MuiButtonBase-root-MuiIconButton-root{
+.css-mf1cb5-MuiButtonBase-root-MuiIconButton-root {
   color: var(--HighTheme) !important;
 }
 
-.iconButtonSelected{
+.iconButtonSelected {
   color: var(--HighTheme) !important;
 }
-
 
 .lkjDVC {
-  border-color: var(--HighTheme)!important;
+  border-color: var(--HighTheme) !important;
 }
 
-.lkjDVC>svg {
+.lkjDVC > svg {
   display: none;
+}
+
+.css-1lo669u-MuiButtonBase-root-MuiButton-root{
+  position: unset !important;
 }

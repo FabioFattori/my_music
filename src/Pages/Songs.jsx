@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { storage } from "../base";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import SingleSong from "../Components/SingleSong";
-import Player from "../Components/Player";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import { setHeight } from "../Functions/SetHeight";
 import { ConvertUrl } from "../Functions/ConvertUrl";
 
-function Songs({ s, title, setSong }) {
+function Songs({ setSong }) {
   const [allSongs, setAll] = useState([]);
   const [spinner, setSpinner] = useState(true);
 
@@ -38,14 +37,13 @@ function Songs({ s, title, setSong }) {
     } else {
       var Storage = JSON.parse(localStorage.getItem("songs"));
       for (let index = 0; index < Storage.length; index++) {
-        Storage[index]=ConvertUrl(Storage[index])
-        
+        Storage[index] = ConvertUrl(Storage[index]);
       }
       setAll(Storage);
     }
     setSpinner(false);
     setTimeout(() => {
-      setHeight();
+      setHeight("/MusicPlayer");
     }, 1);
 
     return () => {
@@ -69,8 +67,6 @@ function Songs({ s, title, setSong }) {
     }
   }
 
-  
-
   return (
     <div className="container">
       {spinner ? (
@@ -89,13 +85,6 @@ function Songs({ s, title, setSong }) {
           })}
         </div>
       )}
-      <div id="Player" className="Player">
-        {s ? (
-          <Player audio={s} titolo={title} setSong={setSong} />
-        ) : (
-          <Player audio={null} titolo={""} />
-        )}
-      </div>
     </div>
   );
 }

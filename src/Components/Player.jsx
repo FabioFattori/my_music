@@ -31,12 +31,11 @@ function Player({ audio, titolo, setSong }) {
     if (appoggio[a].split('"')[1] === undefined) {
       document.getElementById("audio").src = appoggio[a];
       document.getElementById("SongTitle").innerText = getNome(appoggio[a]);
-      setSong(appoggio[a], getNome(appoggio[a]));
     } else {
       document.getElementById("audio").src = appoggio[a].split('"')[1];
       document.getElementById("SongTitle").innerText = getNome(appoggio[a]);
-      setSong(appoggio[a].split('"')[1], getNome(appoggio[a]));
     }
+    setHeight("/MusicPlayer")
   }, []);
 
   const ReplayEvent = useCallback(() => {
@@ -46,9 +45,9 @@ function Player({ audio, titolo, setSong }) {
 
   return (
     <div className="wrapped">
-      <h1 id="SongTitle" className="SongTitle">
+      <h9 id="SongTitle" className="SongTitle">
         {titolo}
-      </h1>
+      </h9>
 
       <div className="MusicPlayer">
         <IconButton
@@ -56,7 +55,7 @@ function Player({ audio, titolo, setSong }) {
             let v = Back();
             setSong(new Audio(v.url), v.title);
             setTimeout(() => {
-              setHeight();
+              setHeight("/MusicPlayer");
             }, 1);
           }}
           aria-label="back"
@@ -80,7 +79,7 @@ function Player({ audio, titolo, setSong }) {
             let v = Next();
             setSong(new Audio(v.url), v.title);
             setTimeout(() => {
-              setHeight();
+              setHeight("/MusicPlayer");
             }, 1);
           }}
           aria-label="next"

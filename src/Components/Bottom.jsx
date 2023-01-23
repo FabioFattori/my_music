@@ -58,7 +58,6 @@ function Bottom() {
           icon={<AudioFileIcon />}
         />
         <BottomNavigationAction
-          id="Settings"
           label="Impostazioni"
           icon={<SettingsIcon />}
         />
