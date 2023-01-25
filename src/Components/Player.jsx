@@ -45,9 +45,9 @@ function Player({ audio, titolo, setSong }) {
 
   return (
     <div className="wrapped">
-      <h9 id="SongTitle" className="SongTitle">
+      <p id="SongTitle" className="SongTitle">
         {titolo}
-      </h9>
+      </p>
 
       <div className="MusicPlayer">
         <IconButton

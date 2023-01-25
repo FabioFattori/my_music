@@ -17,6 +17,8 @@ function App() {
     setTitle(titolo);
   };
 
+ 
+
   return (
     <div className="App">
       <div id="Player" className="Player">

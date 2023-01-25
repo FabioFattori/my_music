@@ -69,7 +69,7 @@
   justify-content: space-evenly;
 }
 
-.lkjDVC {
+.FileUploader>label {
   padding-left: 100px !important;
 
   padding-bottom: 100px !important;
@@ -110,7 +110,7 @@
     flex-direction: column-reverse;
   }
 
-  .lkjDVC {
+  .FileUploader>label {
     padding-left: 20px !important;
 
     padding-bottom: 50px !important;
@@ -171,7 +171,7 @@
     flex-direction: column-reverse;
   }
 
-  .lkjDVC {
+  .FileUploader>label {
     padding-left: 20px !important;
 
     padding-bottom: 50px !important;
@@ -182,19 +182,11 @@
   }
 }
 
-.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root {
-  color: var(--BaseTheme) !important;
+.Bottom>div>div>button {
+  color: var(--BaseTheme);
 }
 
-.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {
-  color: var(--HighTheme) !important;
-}
-
-.css-10vjzfb-MuiButtonBase-root-MuiButton-root {
-  color: var(--HighTheme) !important;
-}
-
-.css-mf1cb5-MuiButtonBase-root-MuiIconButton-root {
+.MusicPlayer>button  {
   color: var(--HighTheme) !important;
 }
 
@@ -202,14 +194,35 @@
   color: var(--HighTheme) !important;
 }
 
-.lkjDVC {
+.FileUploader>label {
   border-color: var(--HighTheme) !important;
 }
 
-.lkjDVC > svg {
+.FileUploader>label > svg {
   display: none;
 }
 
-.css-1lo669u-MuiButtonBase-root-MuiButton-root{
+.SingleSong>button{
   position: unset !important;
+  color: var(--HighTheme) !important;
+}
+
+.SearchBar{
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  
+}
+
+.SearchBar>div>div>fieldset {
+  border-color: var(--BaseTheme) !important;
+}
+
+
+.SearchBar>div>label {
+  color: var(--BaseTheme) !important;
+}
+
+.SearchBar>div>div>div>button {
+  color: var(--HighTheme) !important;
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { MuiColorInput } from "mui-color-input";
 import { setHeight } from "../Functions/SetHeight";
+import { setColor } from "../Functions/setColor";
 
 function Settings() {
   const [Base, setBase] = React.useState(
@@ -11,11 +12,13 @@ function Settings() {
   const handleChangeBase = (color) => {
     setBase(color);
     document.documentElement.style.setProperty("--BaseTheme", color);
+    setColor(2)
   };
 
   const handleChangeSelection = (color) => {
     setSelection(color);
     document.documentElement.style.setProperty("--HighTheme", color);
+    setColor(2)
   };
 
   useEffect(() => {

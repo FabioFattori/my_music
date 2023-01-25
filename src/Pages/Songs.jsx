@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import { setHeight } from "../Functions/SetHeight";
 import { ConvertUrl } from "../Functions/ConvertUrl";
+import SearchBar from "../Components/SearchBar";
 
 function Songs({ setSong }) {
   const [allSongs, setAll] = useState([]);
@@ -46,10 +47,26 @@ function Songs({ setSong }) {
       setHeight("/MusicPlayer");
     }, 1);
 
+    window.addEventListener('scroll',ScrollHandler,true)
+
     return () => {
       window.removeEventListener("beforeunload", CleanStorage);
+      window.removeEventListener('scroll',ScrollHandler,true)
     };
   }, []);
+
+
+
+  const ScrollHandler=()=>{
+    var scrolled=window.scrollY;
+
+    if(scrolled>=100){
+      document.getElementById("SearchBar").style.display="none";
+    }else{
+      document.getElementById("SearchBar").style.display="block";
+      
+    }
+  }
 
   const CleanStorage = () => {
     localStorage.setItem("songs", JSON.stringify(null));
@@ -67,6 +84,8 @@ function Songs({ setSong }) {
     }
   }
 
+  
+
   return (
     <div className="container">
       {spinner ? (
@@ -76,6 +95,7 @@ function Songs({ setSong }) {
       ) : (
         <div id="Tracce" className="Tracce">
           <h1>le mie canzoni:</h1>
+          <SearchBar setAllSongs={setAll} />
           {allSongs.map((s, index) => {
             return (
               <div key={index}>

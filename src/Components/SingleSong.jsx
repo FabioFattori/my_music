@@ -11,7 +11,7 @@ function SingleSong({ url, setCurrentAudio }) {
     let U = ConvertUrl(url);
 
     setAudio(new Audio(U));
-  }, []);
+  }, [url]);
 
   return (
     <div className="SingleSong">
